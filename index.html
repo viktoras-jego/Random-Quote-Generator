@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quote Machine</title>
+  <link rel="stylesheet" href="./bootstrap/dist/css/bootstrap.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway|PT+Sans|Source+Sans+Pro" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="./styles.css">
+
+</head>
+<body class="color-background">
+<div>
+   <div class="box-md col-md-offset-4-and-half">
+      <div style="padding-left: 20px;padding-right: 20px">
+         <span class="text-box-md text-box-md-offset text-style text-center color">
+            <i id="singleQuote" style="font-size: 24px;" class="fa fa-quote-left quotes" aria-hidden="true"></i>
+            <span id="quoteText">
+            </span>
+         </span>
+         <div id="author2" class="author color"><span id="author3">-</span> <span id="author"> </span></div>
+         <div>
+            <button id="twitter" style="float: left" class="btn buttons color-background"> <i class="fa fa-twitter"></i></button>
+            <button id="newQuote" style="float: right" class="btn buttons color-background">New quote</button>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script>
+   $(document).ready(function() {
+      const colors = ['#ff6c5f','#003666',"#77B1A9",'#342224','#49176d','#ff9900','#020202','7f181b','#2c3e50','#537b35','#a4c639','#9b59b6','#16a085','#990033',"#BDBB99",'#2a5934','#505050','#a6192e','#7d0100'];
+      let randomNumber = null;
+      let text = "";
+      let author = "";
+      setRandomColor();
+      function setRandomColor() {
+         let temporaryVar = randomNumber;
+         while(temporaryVar === randomNumber){
+            randomNumber = Math.floor(Math.random() * (colors.length));
+         }
+         handleColors(colors[randomNumber]);
+      }
+      function handleColors(currentColor){
+         $(".color").css("color", currentColor);
+         $(".color-background").css("background-color", currentColor);
+      }
+      quote();
+      function quote(e) {
+         $.ajax({
+            headers: {
+               "X-Mashape-Key": "OivH71yd3tmshl9YKzFH7BTzBVRQp1RaKLajsnafgL2aPsfP9V",
+               Accept: "application/json",
+               "Content-Type": "application/x-www-form-urlencoded"
+            },
+            url: 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=',
+            success: function(response) {
+               var r = JSON.parse(response);
+               if(text == ""){
+                  $( "#singleQuote,#author2" ).animate({
+                     opacity: 1
+                  }, 0 );
+               }
+               text = r.quoteText;
+               author = r.quoteAuthor;
+               if(!r.author){
+                  $('#author').text("Unknown");
+               }
+               else {
+                  $('#author').text(r.author);
+               }
+               $('#quoteText').html(r.quote);
+            }
+         });
+      }
+      function openURL(url){
+         window.open(url);
+      }
+      $( "#newQuote" ).click(function(e) {
+         setRandomColor();
+         $( "#quoteText,#singleQuote,#author,#author3" ).animate({
+            opacity: 0.08
+         }, 700);
+         setTimeout(quote, 300);
+         setTimeout(animateBack, 900);
+         function animateBack () {
+            $( "#quoteText,#singleQuote,#author,#author3" ).animate({
+               opacity: 1
+            }, 750 );
+         }
+      });
+      $( "#twitter" ).click(function(e){
+         openURL('https://twitter.com/intent/tweet?hashtags=freeCodeCamp&text=' + encodeURIComponent('"' + text + '" ' + author));
+      });
+   });
+</script>
+</body>
+</html>

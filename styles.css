@@ -1,0 +1,77 @@
+body{
+    transition: all 1.5s;
+}
+.col-md-offset-4-and-half {
+    margin-left: 35%;
+}
+.box-md{
+    margin-top: 7.5%;
+    display: inline-block;
+    background: white;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    width: 30%;
+    border-radius: 3px;
+    height: auto;
+    transition: all 1.5s;
+}
+.text-box-md{
+    position: relative;
+    min-height: 1px;
+    padding-top: 5%;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    width: 92%;
+    margin-bottom: 20px;
+}
+.text-box-md-offset{
+    margin-left: 4%;
+    margin-right: 4%;
+}
+.text-style{
+    font-family: 'Raleway', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    transition: all 1.5s;
+}
+.quotes{
+    padding-top: -5px;
+    margin-right: 5px;
+}
+.author{
+    text-align: right;
+    font-size: 17px;
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 35px;
+    font-weight: 600;
+    transition: all 1.5s;
+}
+.color{
+
+}
+.color-background{
+
+}
+.buttons{
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 40px;
+    transition: all 1.5s;
+}
+.btn:hover{
+    color: white;
+    opacity: 0.85;
+}
+.btn:enabled{
+    color: white;
+}
+#singleQuote{
+    opacity: 0;
+}
+#author2{
+    opacity: 0;
+}
